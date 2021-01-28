@@ -20,7 +20,6 @@ jobs:
         ruby-version: 2.6
         bundler-cache: true
     - run: gem install localeapp
-    - run: localeapp -k ${LOCALEAPP_API_KEY} push
+    - run: localeapp -k "$LOCALEAPP_API_KEY" push config/locales
       env:
-        LOCALEAPP_API_KEY: "${{secrets.LOCALEAPP_API_KEY}}"
-
+        LOCALEAPP_API_KEY: ${{ secrets.LOCALEAPP_API_KEY }}
