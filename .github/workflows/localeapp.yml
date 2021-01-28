@@ -1,0 +1,26 @@
+name: Localeapp
+
+on:
+  push:
+    branches:
+      - develop
+    paths:
+      - 'config/locales/**/*.yml'
+
+jobs:
+  localeapp-push:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 2.6
+        bundler-cache: true
+    - run: gem install localeapp
+    - run: localeapp -k ${LOCALEAPP_API_KEY} push
+      env:
+        LOCALEAPP_API_KEY: "${{secrets.LOCALEAPP_API_KEY}}"
+
